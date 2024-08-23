@@ -1,0 +1,26 @@
+{
+  "name": "ele-theme-tool",
+  "version": "0.0.2",
+  "main": "index.js",
+  "license": "MIT",
+  "keywords": [
+    "scss",
+    "ElementUI",
+    "theme"
+  ],
+  "bin": {
+    "ele-theme-tool": "./bin/index.js",
+    "ett": "./bin/index.js"
+  },
+  "dependencies": {
+    "commander": "^3.0.2",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.0",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-nop": "0.0.3",
+    "gulp-sass": "^4.0.2",
+    "gulp4-run-sequence": "^1.0.0",
+    "ora": "^4.0.2",
+    "glob": "^7.2.3"
+  }
+}

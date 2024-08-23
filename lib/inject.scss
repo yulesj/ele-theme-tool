@@ -1,0 +1,48 @@
+/* 自定义函数 */
+@function mixToVar($c1, $c2, $percent: 50%) {
+
+    $str: '';
+    $len: str-index($percent + '', '%');
+    $percentNew: $percent;
+
+    @if $len {
+        $percentNew: str-slice($percent+'', 0, $len - 1)
+    }
+
+    $c1Str: $c1+'';
+    $c2Str: $c2+'';
+    $c1VarIdx: str-index($c1Str, 'var(');
+    $c2VarIdx: str-index($c2Str, 'var(');
+
+    @if $c1VarIdx {
+        $str: '#{str-slice($c1Str, str-index($c1Str, '(') + 1, str-index($c1Str, ')') - 1)}'
+    }
+
+    @else {
+        $str: '--YS#{transformColor($c1)}'
+    }
+
+    @if $c2VarIdx {
+        $c2Var: #{str-slice($c2Str,str-index($c2Str, '(') + 1, str-index($c2Str, ')') - 1)};
+        $str: $str + '_#{$c2Var}_' + $percentNew;
+        @return var(unquote($str));
+    }
+
+    @if $c1VarIdx {
+        $str: $str + '_--YS#{transformColor($c2)}_' + $percentNew;
+        @return var(unquote($str));
+    }
+
+    @return mix($c1, $c2, $percent);
+}
+
+@function transformColor($color) {
+    $str: $color+'';
+    $idx: str-index($str, '#');
+
+    @if $idx {
+        @return str-slice($str, $idx+ 1);
+    }
+    
+    @return $color;
+}
